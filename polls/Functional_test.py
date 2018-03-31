@@ -17,35 +17,6 @@ class FunctionalTest(TestCase):
         self.browser.get('http://localhost:8000')
         self.assertIn('Busco Ayuda', self.browser.title)
 
-    def test_verDetalle(self):
-        self.browser.get('http://localhost:8000')
-        span=self.browser.find_element(By.XPATH, '//span[text()="David Felipe Sabogal"]')
-        span.click()
-
-        h2=self.browser.find_element(By.XPATH, '//h2[text()="David Felipe Sabogal"]')
-
-        self.assertIn('David Felipe Sabogal', h2.text)
-
-    def test_login(self):
-        self.browser.get('http://localhost:8000')
-        link = self.browser.find_element_by_id('id_login')
-        link.click()
-
-        loginmodal=self.browser.find_element_by_id('login_modal')
-        nombreUsuario = loginmodal.find_element_by_id('id_username')
-        nombreUsuario.send_keys('felipe')
-
-
-        clave = loginmodal.find_element_by_id('id_password')
-        clave.send_keys('administrador')
-
-        botonGrabar = self.browser.find_element_by_id('id_ingresar')
-        botonGrabar.click()
-
-        self.browser.implicitly_wait(3)
-        linkeditar = self.browser.find_element_by_id('id_editar')
-        self.assertIn('Editar', linkeditar.text)
-
     def test_registro(self):
         self.browser.get('http://localhost:8000')
         link = self.browser.find_element_by_id('id_register')
@@ -83,4 +54,71 @@ class FunctionalTest(TestCase):
         span=self.browser.find_element(By.XPATH, '//span[text()="David Felipe Sabogal"]')
 
         self.assertIn('David Felipe Sabogal', span.text)
+
+    def test_verDetalle(self):
+        self.browser.get('http://localhost:8000')
+        span=self.browser.find_element(By.XPATH, '//span[text()="David Felipe Sabogal"]')
+        span.click()
+
+        h2=self.browser.find_element(By.XPATH, '//h2[text()="David Felipe Sabogal"]')
+
+        self.assertIn('David Felipe Sabogal', h2.text)
+
+    def test_login(self):
+        self.browser.get('http://localhost:8000')
+        link = self.browser.find_element_by_id('id_login')
+        link.click()
+
+        loginmodal=self.browser.find_element_by_id('login_modal')
+        nombreUsuario = loginmodal.find_element_by_id('id_username')
+        nombreUsuario.send_keys('felipe')
+
+
+        clave = loginmodal.find_element_by_id('id_password')
+        clave.send_keys('administrador')
+
+        botonGrabar = self.browser.find_element_by_id('id_ingresar')
+        botonGrabar.click()
+
+        self.browser.implicitly_wait(3)
+        linkeditar = self.browser.find_element_by_id('id_editar')
+        self.assertIn('Editar', linkeditar.text)
+
+    def test_editar(self):
+        self.browser.get('http://localhost:8000')
+        link = self.browser.find_element_by_id('id_login')
+        link.click()
+
+        loginmodal=self.browser.find_element_by_id('login_modal')
+        nombreUsuario = loginmodal.find_element_by_id('id_username')
+        nombreUsuario.send_keys('felipe1')
+
+
+        clave = loginmodal.find_element_by_id('id_password')
+        clave.send_keys('clave123')
+
+        botonGrabar = self.browser.find_element_by_id('id_ingresar')
+        botonGrabar.click()
+
+        self.browser.implicitly_wait(3)
+        linkeditar = self.browser.find_element_by_id('id_editar')
+        linkeditar.click()
+
+        editarmodal=self.browser.find_element_by_id('editar_modal')
+        experiencia = editarmodal.find_element_by_id('id_aniosExperiencia')
+        experiencia.send_keys('2')
+
+        botonModificar=editarmodal.find_element_by_id('id_modificar')
+        botonModificar.click()
+
+        self.browser.implicitly_wait(3)
+        linkeditar1 = self.browser.find_element_by_id('id_editar')
+        linkeditar1.click()
+
+        experiencia1 = editarmodal.find_element_by_id('id_aniosExperiencia')
+        self.assertIn('2', experiencia1.text)
+
+
+
+
 
