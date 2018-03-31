@@ -1,6 +1,7 @@
 __author__ = 'asistente'
 from unittest import TestCase
 from selenium import webdriver
+import os.path
 from selenium.webdriver.common.by import By
 
 class FunctionalTest(TestCase):
@@ -38,7 +39,8 @@ class FunctionalTest(TestCase):
         correo.send_keys('df.sabogal10@uniandes.edu.co')
 
         imagen = self.browser.find_element_by_id('id_imagen')
-        imagen.send_keys('./static/atila.jpeg')
+        print()
+        imagen.send_keys(os.path.dirname(os.path.realpath(__file__))+'/static/atila.jpeg')
 
         nombreUsuario = self.browser.find_element_by_id('id_username')
         nombreUsuario.send_keys('felipe1')
