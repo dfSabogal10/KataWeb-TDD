@@ -119,6 +119,31 @@ class FunctionalTest(TestCase):
         experiencia1 = editarmodal1.find_element_by_id('id_aniosExperiencia')
         self.assertIn('2', experiencia1.get_attribute("value"))
 
+    def test_comentario(self):
+        self.browser.get('http://localhost:8000')
+        span = self.browser.find_element(By.XPATH, '//span[text()="David Felipe Sabogal"]')
+        span.click()
+
+        self.browser.implicitly_wait(5)
+
+        correo = self.browser.find_element_by_id('correo')
+        correo.send_keys('email@email.com')
+
+        comentario = self.browser.find_element_by_id('comentario')
+        comentario.send_keys('Estamos buscando alguien con tu perfil')
+
+        botoncomentar = self.browser.find_element(By.XPATH, '//button[text()="Comentar"]')
+        botoncomentar.click()
+
+        self.browser.implicitly_wait(5)
+        correo1 = self.browser.find_element(By.XPATH, '//h4[text()="email@email.com"]')
+        comentario1 = self.browser.find_element(By.XPATH, '//p[text()="Estamos buscando alguien con tu perfil"]')
+        self.assertNotEqual(correo1, None)
+        self.assertNotEqual(comentario1, None)
+
+
+
+
 
 
 
