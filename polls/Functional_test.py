@@ -58,12 +58,12 @@ class FunctionalTest(TestCase):
 
     def test_verDetalle(self):
         self.browser.get('http://localhost:8000')
-        span=self.browser.find_element(By.XPATH, '//span[text()="David Felipe Sabogal"]')
+        span=self.browser.find_element(By.XPATH, '//span[text()="Felipe Sabogal"]')
         span.click()
 
-        h2=self.browser.find_element(By.XPATH, '//h2[text()="David Felipe Sabogal"]')
+        h2=self.browser.find_element(By.XPATH, '//h2[text()="Felipe Sabogal"]')
 
-        self.assertIn('David Felipe Sabogal', h2.text)
+        self.assertIn('Felipe Sabogal', h2.text)
 
     def test_login(self):
         self.browser.get('http://localhost:8000')
@@ -107,6 +107,7 @@ class FunctionalTest(TestCase):
 
         editarmodal=self.browser.find_element_by_id('editar_modal')
         experiencia = editarmodal.find_element_by_id('id_aniosExperiencia')
+        experiencia.clear()
         experiencia.send_keys('2')
 
         botonModificar=editarmodal.find_element_by_id('id_modificar')
@@ -117,11 +118,11 @@ class FunctionalTest(TestCase):
 
         editarmodal1 = self.browser.find_element_by_id('editar_modal')
         experiencia1 = editarmodal1.find_element_by_id('id_aniosExperiencia')
-        self.assertIn('2', experiencia1.get_attribute("value"))
+        self.assertEqual('2', experiencia1.get_attribute("value"))
 
     def test_comentario(self):
         self.browser.get('http://localhost:8000')
-        span = self.browser.find_element(By.XPATH, '//span[text()="David Felipe Sabogal"]')
+        span = self.browser.find_element(By.XPATH, '//span[text()="Felipe Sabogal"]')
         span.click()
 
         self.browser.implicitly_wait(5)
